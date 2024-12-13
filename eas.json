@@ -1,0 +1,17 @@
+{
+  "build": {
+    "preview": {
+      "android": {
+        "buildType": "apk"  // APK for testing or local use
+      }
+    },
+    "preview2": {
+      "android": {
+        "gradleCommand": ":app:assembleRelease"  // Gradle release build command
+      }
+    },
+    "preview3": {
+      "developmentClient": true  // For dev/testing builds (not for store)
+    }
+  }
+}
