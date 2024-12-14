@@ -10,7 +10,7 @@ import AlertsScreen from './screens/AlertsScreen';
 import StatisticsScreen from './screens/StatisticsScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import FullscreenImageScreen from './screens/FullscreenImageScreen'; // Import Fullscreen Image Screen
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { UserProvider } from './context/UserContext'; // Import UserProvider
 
 const Stack = createStackNavigator();
 
@@ -24,24 +24,26 @@ export default function App() {
   }, []);
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        {/* Conditional Splash Screen */}
-        {showSplash && <Stack.Screen name="Splash" component={SplashScreen} />}
-        {!showSplash && (
-          <>
-            <Stack.Screen name="Login" component={LoginScreen} />
-            <Stack.Screen name="SignUp" component={SignUpScreen} />
-            <Stack.Screen name="Home" component={HomeScreen} />
-            <Stack.Screen name="Map" component={MapScreen} />
-            <Stack.Screen name="Alerts" component={AlertsScreen} />
-            <Stack.Screen name="Statistics" component={StatisticsScreen} />
-            <Stack.Screen name="Profile" component={ProfileScreen} />
-            {/* Add Fullscreen Image Screen */}
-            <Stack.Screen name="FullscreenImage" component={FullscreenImageScreen} />
-          </>
-        )}
-      </Stack.Navigator>
-    </NavigationContainer>
+    <UserProvider> {/* Wrap the app with UserProvider */}
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          {/* Conditional Splash Screen */}
+          {showSplash && <Stack.Screen name="Splash" component={SplashScreen} />}
+          {!showSplash && (
+            <>
+              <Stack.Screen name="Login" component={LoginScreen} />
+              <Stack.Screen name="SignUp" component={SignUpScreen} />
+              <Stack.Screen name="Home" component={HomeScreen} />
+              <Stack.Screen name="Map" component={MapScreen} />
+              <Stack.Screen name="Alerts" component={AlertsScreen} />
+              <Stack.Screen name="Statistics" component={StatisticsScreen} />
+              <Stack.Screen name="Profile" component={ProfileScreen} />
+              {/* Add Fullscreen Image Screen */}
+              <Stack.Screen name="FullscreenImage" component={FullscreenImageScreen} />
+            </>
+          )}
+        </Stack.Navigator>
+      </NavigationContainer>
+    </UserProvider>
   );
 }

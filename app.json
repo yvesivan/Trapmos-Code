@@ -20,15 +20,12 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.trapmos.team53"
+      "package": "com.trapmos.team53",
+      "versionCode": 1  
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "extra": {
-      "eas": {
-        "projectId": "81b0f8d0-1440-4380-9445-3ab806fb5de4"
-      }
-    }
+    "newArchEnabled": true
   }
 }

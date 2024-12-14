@@ -76,13 +76,6 @@ export default function LoginScreen() {
         <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
           <Text style={styles.loginButtonText}>Login</Text>
         </TouchableOpacity>
-
-        <Text style={styles.orText}>or login with</Text>
-
-        <TouchableOpacity style={styles.appleButton}>
-          <Icon name="apple" size={24} color="#fff" />
-          <Text style={styles.appleButtonText}>Apple</Text>
-        </TouchableOpacity>
       </View>
     </View>
   );
@@ -161,24 +154,5 @@ const styles = StyleSheet.create({
   loginButtonText: {
     color: '#1b2a38',
     fontWeight: 'bold',
-  },
-  orText: {
-    color: '#a9a9a9',
-    fontSize: 14,
-    marginVertical: 10,
-  },
-  appleButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#000',
-    borderRadius: 25,
-    height: 50,
-    width: '80%',
-    justifyContent: 'center',
-  },
-  appleButtonText: {
-    color: '#fff',
-    fontWeight: 'bold',
-    marginLeft: 8,
   },
 });

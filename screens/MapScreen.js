@@ -16,7 +16,10 @@ export default function MapScreen({ navigation }) {
   };
 
   // Sample image of the Aedes mosquito, replace with actual image URL or local image
-  const mosquitoImageUrl = require('../images/Testing.jpg'); // Ensure the path is correct
+  const mosquitoImageUrl = require('../assets/Testing.jpg'); // Ensure the path is correct
+
+  // Debugging: Log image source
+  console.log("Mosquito Image Source:", mosquitoImageUrl);
 
   const handleMarkerAPress = () => {
     Alert.alert(
@@ -196,9 +199,10 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   mosquitoImage: {
-    width: 100,
-    height: 100,
-    resizeMode: 'contain',
+    width: 150,  // Increased width for better visibility
+    height: 150,  // Increased height for better visibility
+    resizeMode: 'contain',  // Ensures image maintains aspect ratio
+    backgroundColor: 'transparent',  // Helps identify if the image is there
   },
   calloutText: {
     fontSize: 14,

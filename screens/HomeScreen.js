@@ -3,48 +3,60 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { FontAwesome, MaterialIcons, Ionicons, Entypo } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
-export default function HomeScreen() {
+// Home Screen Component
+function HomeScreen() {
   const navigation = useNavigation();
 
   return (
     <View style={styles.container}>
+      {/* Header Section */}
       <View style={styles.header}>
         <Text style={styles.title}>Dashboard</Text>
-        <Entypo name="dots-three-vertical" size={24} color="#ffffff" style={styles.moreIcon} />
       </View>
+
+      {/* Grid Section */}
       <View style={styles.grid}>
         <TouchableOpacity
           style={styles.card}
-          onPress={() => navigation.navigate('Profile')} // Navigate to Profile screen
+          onPress={() => navigation.navigate('Profile')}
         >
           <FontAwesome name="user-circle-o" size={30} color="#fff" />
           <Text style={styles.cardText}>Profile</Text>
         </TouchableOpacity>
+
         <TouchableOpacity
-          style={[styles.card, styles.cardLight]} // White background for Statistics button
-          onPress={() => navigation.navigate('Statistics')} // Navigate to Statistics screen
+          style={[styles.card, styles.cardLight]}
+          onPress={() => navigation.navigate('Statistics')}
         >
           <MaterialIcons name="show-chart" size={30} color="#000" />
           <Text style={styles.cardTextDark}>Statistics</Text>
         </TouchableOpacity>
-        {/* Alerts Button */}
+
         <TouchableOpacity
-          style={[styles.card, styles.cardLight]} // White background for Alerts button
-          onPress={() => navigation.navigate('Alerts')} // Navigate to Alerts screen
+          style={[styles.card, styles.cardLight]}
+          onPress={() => navigation.navigate('Alerts')}
         >
-          <Ionicons name="notifications-outline" size={30} color="#000" /> {/* Black icon for contrast */}
-          <Text style={styles.cardTextDark}>Alerts</Text> {/* Dark text for contrast */}
+          <Ionicons name="notifications-outline" size={30} color="#000" />
+          <Text style={styles.cardTextDark}>Alerts</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('Map')}>
+
+        <TouchableOpacity
+          style={styles.card}
+          onPress={() => navigation.navigate('Map')}
+        >
           <Entypo name="map" size={30} color="#fff" />
           <Text style={styles.cardText}>Map</Text>
         </TouchableOpacity>
       </View>
+
+      {/* Recent Alert Section */}
       <View style={styles.recentAlertContainer}>
         <Text style={styles.recentAlertTitle}>Recent Alert</Text>
         <TouchableOpacity style={styles.recentAlert}>
-          <Text style={styles.recentAlertText}>Location A</Text>
-          <Text style={styles.recentAlertSubText}>Today, 24 mins ago</Text>
+          <View>
+            <Text style={styles.recentAlertText}>Location A</Text>
+            <Text style={styles.recentAlertSubText}>Today, 24 mins ago</Text>
+          </View>
           <MaterialIcons name="arrow-forward-ios" size={16} color="#000" style={styles.arrowIcon} />
         </TouchableOpacity>
       </View>
@@ -56,22 +68,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    paddingTop: 60, // Adjusted top padding to create more space at the top
+    paddingTop: 60,
     backgroundColor: '#0f1924',
   },
   header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
     marginBottom: 20,
   },
   title: {
     fontSize: 28,
     fontWeight: 'bold',
     color: '#ffffff',
-  },
-  moreIcon: {
-    marginRight: 10,
   },
   grid: {
     flexDirection: 'row',
@@ -131,3 +137,5 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
 });
+
+export default HomeScreen;

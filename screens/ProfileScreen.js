@@ -1,12 +1,19 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image, Switch, StatusBar } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { UserContext } from '../context/UserContext'; // Import the shared context
 
 export default function ProfileScreen({ navigation }) {
+  const { user } = useContext(UserContext); // Access user details from context
+  
+  // State for sound and vibration switches
+  const [soundEnabled, setSoundEnabled] = useState(true); // Default is on
+  const [vibrationEnabled, setVibrationEnabled] = useState(true); // Default is on
+
   return (
     <View style={styles.container}>
       {/* Set the Status Bar */}
-      <StatusBar barStyle="dark-content" backgroundColor="#ffffff" />
+      <StatusBar barStyle="light-content" backgroundColor="#000" />
 
       {/* Header with Back Button */}
       <View style={styles.header}>
@@ -19,11 +26,11 @@ export default function ProfileScreen({ navigation }) {
       {/* Profile Section */}
       <View style={styles.profileContainer}>
         <Image
-          source={{ uri: 'https://via.placeholder.com/150' }} // Replace with the actual profile image URL
+          source={{ uri: 'https://via.placeholder.com/150' }} // Replace with actual profile image URL
           style={styles.profileImage}
         />
-        <Text style={styles.profileName}>Juan Dela Cruz</Text>
-        <Text style={styles.profileEmail}>JuanDelaCruz19@gmail.com</Text>
+        <Text style={styles.profileName}>{user.name || 'Name not set'}</Text>
+        <Text style={styles.profileEmail}>{user.email || 'Email not set'}</Text>
         <TouchableOpacity style={styles.editButton}>
           <Text style={styles.editButtonText}>Edit Profile</Text>
         </TouchableOpacity>
@@ -34,11 +41,17 @@ export default function ProfileScreen({ navigation }) {
         <Text style={styles.sectionTitle}>Notifications</Text>
         <View style={styles.settingRow}>
           <Text style={styles.settingLabel}>Sound</Text>
-          <Switch value={true} />
+          <Switch 
+            value={soundEnabled} 
+            onValueChange={() => setSoundEnabled(previousState => !previousState)} // Toggle state
+          />
         </View>
         <View style={styles.settingRow}>
           <Text style={styles.settingLabel}>Vibration</Text>
-          <Switch value={true} />
+          <Switch 
+            value={vibrationEnabled} 
+            onValueChange={() => setVibrationEnabled(previousState => !previousState)} // Toggle state
+          />
         </View>
       </View>
 
@@ -69,12 +82,12 @@ export default function ProfileScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f7f9fc',
+    backgroundColor: '#f7f7f7',
   },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#0f1924',
+    backgroundColor: '#000', // Black background
     paddingVertical: 10,
     paddingHorizontal: 20,
     elevation: 2,
@@ -82,8 +95,8 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,
-    marginBottom: 20,
-    marginTop: 40, // Aligns the header below the status bar
+    marginBottom: -25,
+    marginTop: 40, // Increased marginTop to lower the header
   },
   backButton: {
     padding: 10,
@@ -91,12 +104,15 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 22,
     fontWeight: 'bold',
-    color: '#fff',
+    color: '#fff', // White text
     marginLeft: 10,
   },
   profileContainer: {
     alignItems: 'center',
-    paddingVertical: 20,
+    marginTop: 30,
+    paddingBottom: 30,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ddd',
   },
   profileImage: {
     width: 100,
@@ -105,58 +121,47 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   profileName: {
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: 'bold',
-    color: '#000',
+    color: '#333',
   },
   profileEmail: {
-    fontSize: 14,
+    fontSize: 16,
     color: '#666',
-    marginBottom: 10,
+    marginBottom: 20,
   },
   editButton: {
-    backgroundColor: '#000',
-    paddingVertical: 5,
-    paddingHorizontal: 15,
-    borderRadius: 5,
+    backgroundColor: '#3ca25f',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 25,
   },
   editButtonText: {
     color: '#fff',
-    fontSize: 14,
     fontWeight: 'bold',
   },
   section: {
-    backgroundColor: '#fff',
-    borderRadius: 10,
-    padding: 15,
-    marginVertical: 10,
-    marginHorizontal: 20,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 2,
+    marginTop: 30,
+    paddingHorizontal: 20,
   },
   sectionTitle: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: 'bold',
-    color: '#000',
-    marginBottom: 10,
+    color: '#333',
+    marginBottom: 15,
   },
   settingRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingVertical: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: '#eee',
+    marginBottom: 15,
   },
   settingLabel: {
-    fontSize: 14,
-    color: '#000',
+    fontSize: 16,
+    color: '#333',
   },
   settingValue: {
-    fontSize: 14,
+    fontSize: 16,
     color: '#666',
   },
 });
